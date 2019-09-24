@@ -103,7 +103,7 @@ def encrypt(msg, h, k, q, g, gammaValue):
     for i in range(0, len(en_msg)):
         en_msg[i] = (s * ord(en_msg[i])) + gammaValue
 
-    print('messaggio cifrato: ', en_msg)
+    print('messaggio cifrato:', en_msg)
 
     return en_msg, p
 
@@ -123,12 +123,15 @@ def decrypt(en_msg, p, key, q, gammaValue):
     for i in range(0, len(en_msg)):
         dr_msg.append(chr(int((en_msg[i] - gammaValue) / h)))
 
+    print (dr_msg)
+
     return dr_msg
 
 """"
-Funzione di main generata per il testing
+Funzione di main 
 """
 def main():
+    global q, g, key
 
     #scelta del numero primo da usare
     q = int(raw_input('inserisci il numero primo che vuoi usare (suggerimento: un numero primo grande è 3613): '))
@@ -138,13 +141,10 @@ def main():
     username, matricola, secretKey = collectAttributes()
     gammaValue = generateGammaValue(username, matricola, secretKey, q)
 
-
-
     #trovo il generatore
     g = findGenerators(q)
 
     print ('il generatore trovato è: {0}'.format(g))
-
 
     msg = str(raw_input('inserisci il messaggio da cifrare: '))
     print("Messaggio originale :", msg)
@@ -171,7 +171,6 @@ def main():
     dr_msg2 = decrypt(en_msg2, p2, key, q, gammaV)
     dmsg2 = ''.join(dr_msg2)
     print("il messaggio cifrato per questo utente è:", dmsg2);
-
 
 
 if __name__ == '__main__':

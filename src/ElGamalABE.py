@@ -24,6 +24,33 @@ g =0
 # NB = verra' inizializzati a zero per comodita'
 key = 0
 
+"""
+Questo metodo è utile per trasformare le lettere in numeri, entra in gioco
+quando si produce il gammaValue
+"""
+def stringToNumbers(string):
+    outputValue = []
+    finalValue = 1
+    for character in string:
+        number = ord(character)
+        outputValue.append(number)
+
+    for index in range (1,len(outputValue)-1):
+        finalValue = outputValue[index] * finalValue
+
+    return finalValue
+
+"""
+Questo metodo genera un valore gamma, utile a cifrare lo stesso messaggio
+in modo diverso in base agli attributi inseriti 
+"""
+def generateGammaValue(username, matricola, secretKey, q):
+    intUser = stringToNumbers(username)
+    secretKey =  stringToNumbers(secretKey)
+    gammaValue = (intUser * matricola * secretKey) % q
+
+    print ('gammaValue: ', gammaValue)
+    return gammaValue
 
 """
 Metodo di esponenziazione modulare
@@ -40,6 +67,16 @@ def power(a, b, c):
 
     return x % c
 
+def collectAttributes():
+
+    print ('inserisci i tuoi attributi per la cifratura.')
+    username = str(raw_input('username: '))
+    matricola = int(raw_input('matricola: '))
+    secretKey = str(raw_input('secret key: '))
+
+    return username, matricola, secretKey
+
+
 
 """
 Algoritmo di ElGamal di cifratura asimmetrica
@@ -48,11 +85,11 @@ Algoritmo di ElGamal di cifratura asimmetrica
         h = betaValue, valore di Beta dato dal pow(generatore, alfa)
         g = generatore utilizzato
 @:return en_msg = array del messaggio cifrato
-         p = generatore elevato alla k mod q
+        p = generatore elevato alla k mod q
 """
 
 
-def encrypt(msg, h, k, q, g):
+def encrypt(msg, h, k, q, g, gammaValue):
     en_msg = []
 
     s = power(h, k, q)
@@ -64,7 +101,7 @@ def encrypt(msg, h, k, q, g):
     print("g^k used : ", p)
     print("g^ak used : ", s)
     for i in range(0, len(en_msg)):
-        en_msg[i] = (s * ord(en_msg[i]))
+        en_msg[i] = (s * ord(en_msg[i])) + gammaValue
 
     print('messaggio cifrato: ', en_msg)
 
@@ -80,11 +117,11 @@ Algoritmo di ElGamal di decifratura asimmetrica
 
 """
 
-def decrypt(en_msg, p, key, q):
+def decrypt(en_msg, p, key, q, gammaValue):
     dr_msg = []
     h = power(p, key, q)
     for i in range(0, len(en_msg)):
-        dr_msg.append(chr(int((en_msg[i]) / h)))
+        dr_msg.append(chr(int((en_msg[i] - gammaValue) / h)))
 
     return dr_msg
 
@@ -97,6 +134,11 @@ def main():
     q = int(raw_input('inserisci il numero primo che vuoi usare (suggerimento: un numero primo grande è 3613): '))
 
     print ('il numero primo che hai scelto è {0}'.format(q))
+    #raccolta attributi
+    username, matricola, secretKey = collectAttributes()
+    gammaValue = generateGammaValue(username, matricola, secretKey, q)
+
+
 
     #trovo il generatore
     g = findGenerators(q)
@@ -111,14 +153,25 @@ def main():
     key = gen_key(q)
 
     betaValue = power(g, key, q)
-    print('numero primo usato: ',q)
-    print("generatore usato : ", g)
-    print("g^a vale : ", betaValue)
 
-    en_msg, p = encrypt(msg, betaValue,key, q, g)
-    dr_msg = decrypt(en_msg, p, key, q)
+    en_msg, p = encrypt(msg, betaValue,key, q, g, gammaValue)
+    dr_msg = decrypt(en_msg, p, key, q, gammaValue)
     dmsg = ''.join(dr_msg)
-    print("Messaggio decifrato :", dmsg);
+    print("il messaggio cifrato per questo utente è:", dmsg);
+
+    print ("*******************")
+
+    print ("considero gli attributi di un altro utente, usando lo stesso plaintext {0}, lo stesso numero primo {1}, lo stesso generatore {2},"
+           "la stessa chiave {3}".format(msg, q, g, key))
+    usr, mat, secKey = collectAttributes()
+
+    gammaV = generateGammaValue(usr, mat, secKey, q)
+
+    en_msg2, p2 = encrypt(msg, betaValue, key, q, g, gammaV)
+    dr_msg2 = decrypt(en_msg2, p2, key, q, gammaV)
+    dmsg2 = ''.join(dr_msg2)
+    print("il messaggio cifrato per questo utente è:", dmsg2);
+
 
 
 if __name__ == '__main__':

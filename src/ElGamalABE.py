@@ -103,7 +103,7 @@ def encrypt(msg, h, k, q, g, gammaValue):
     for i in range(0, len(en_msg)):
         en_msg[i] = (s * ord(en_msg[i])) + gammaValue
 
-    print('messaggio cifrato:', en_msg)
+    print('messaggio cifrato: ', en_msg)
 
     return en_msg, p
 
@@ -122,8 +122,6 @@ def decrypt(en_msg, p, key, q, gammaValue):
     h = power(p, key, q)
     for i in range(0, len(en_msg)):
         dr_msg.append(chr(int((en_msg[i] - gammaValue) / h)))
-
-    print (dr_msg)
 
     return dr_msg
 
@@ -167,8 +165,7 @@ def main():
 
     gammaV = generateGammaValue(usr, mat, secKey, q)
 
-    en_msg2, p2 = encrypt(msg, betaValue, key, q, g, gammaV)
-    dr_msg2 = decrypt(en_msg2, p2, key, q, gammaV)
+    dr_msg2 = decrypt(en_msg, p, key, q, gammaV)
     dmsg2 = ''.join(dr_msg2)
     print("il messaggio cifrato per questo utente è:", dmsg2);
 

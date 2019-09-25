@@ -160,7 +160,7 @@ def main():
     print ("*******************")
 
     print ("considero gli attributi di un altro utente, usando lo stesso plaintext {0}, lo stesso numero primo {1}, lo stesso generatore {2},"
-           "la stessa chiave {3}".format(msg, q, g, key))
+           "la stessa chiave {3} e lo stesso ciphertext {4}".format(msg, q, g, key, en_msg))
     usr, mat, secKey = collectAttributes()
 
     gammaV = generateGammaValue(usr, mat, secKey, q)

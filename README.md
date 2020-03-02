@@ -32,16 +32,16 @@ Questo metodo viene invocato dalla funzione _generateGammaValue_ che genera un u
     
 Infine il Gammavalue viene sommato semplicemente al valore cifrato di ogni lettera:
         
-        for i in range(0, len(en_msg)):
-        en_msg[i] = (s * ord(en_msg[i])) + gammaValue
+    for i in range(0, len(en_msg)):
+    en_msg[i] = (s * ord(en_msg[i])) + gammaValue
         
 ## El Gamal Classico
 Questo modulo rappresenta una implementazione classica dell'algoritmo di El Gamal, è stato utile come punto di partenza per l'espansione dello stesso con ABE.
 
 ## Documentazione completa
-Una documentazione più completa è disponibile a questo [https://github.com/dipalmabiagio/progettocrittografia/blob/master/doc/ElGamal%20con%20ABE.pdf][link].
+Una documentazione più completa è disponibile a questo link (https://github.com/dipalmabiagio/progettocrittografia/blob/master/doc/ElGamal%20con%20ABE.pdf).
 
 ## Contributors
-* Biagio Dipalma - Università degli Studi di Milano | La Statale. CDL Magistrale in Sicurezza Informatica.
+* Biagio Dipalma (https://www.linkedin.com/in/biagio-dipalma/) - Università degli Studi di Milano | La Statale. CDL Magistrale in Sicurezza Informatica.
 
 

@@ -43,5 +43,6 @@ Una documentazione più completa è disponibile a questo [link](https://github.c
 
 ## Contributors
 * [Biagio Dipalma](https://www.linkedin.com/in/biagio-dipalma/) - Università degli Studi di Milano | La Statale. CDL Magistrale in Sicurezza Informatica.
+* [Sara Longo](https://www.linkedin.com/in/sara-longo-2b2830187/) - Università degli Studi di Milano | La Statale. CDL Magistrale in Sicurezza Informatica.
 
 

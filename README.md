@@ -39,9 +39,9 @@ Infine il Gammavalue viene sommato semplicemente al valore cifrato di ogni lette
 Questo modulo rappresenta una implementazione classica dell'algoritmo di El Gamal, è stato utile come punto di partenza per l'espansione dello stesso con ABE.
 
 ## Documentazione completa
-Una documentazione più completa è disponibile a questo [link] (https://github.com/dipalmabiagio/progettocrittografia/blob/master/doc/ElGamal%20con%20ABE.pdf).
+Una documentazione più completa è disponibile a questo [link](https://github.com/dipalmabiagio/progettocrittografia/blob/master/doc/ElGamal%20con%20ABE.pdf).
 
 ## Contributors
-* [Biagio Dipalma] (https://www.linkedin.com/in/biagio-dipalma/) - Università degli Studi di Milano | La Statale. CDL Magistrale in Sicurezza Informatica.
+* [Biagio Dipalma](https://www.linkedin.com/in/biagio-dipalma/) - Università degli Studi di Milano | La Statale. CDL Magistrale in Sicurezza Informatica.
 
 
